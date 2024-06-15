@@ -6,8 +6,6 @@
 
 DBee is a terminal-based TUI application written in Go, designed for connecting to MySQL, MariaDB, and PostgreSQL databases. It offers a terminal-based interface for browsing database contents and executing SQL queries.
 
-[Screencast](https://github.com/murat-cileli/dbee/assets/6532000/d9d2cd86-e505-471d-91e4-d56cf8d34725)  
-
 ### Features
 - Supports MySQL, MariaDB, and PostgreSQL
 - Single executable with no dependencies
@@ -16,7 +14,9 @@ DBee is a terminal-based TUI application written in Go, designed for connecting 
 - List database tables and views
 - View table structures and browse data
 - Execute SQL queries
-- Fixed columns in table results  
+- Fixed columns in results table  
+  
+[](https://github.com/murat-cileli/dbee/assets/6532000/d9d2cd86-e505-471d-91e4-d56cf8d34725)  
 
 ## Keyboard Shortcuts
 
