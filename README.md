@@ -49,3 +49,7 @@ DBee is a terminal-based TUI application written in Go, designed for connecting 
 ### Download
 - [Windows (amd64)](https://github.com/murat-cileli/dbee/releases/download/0.1/dbee_windows_amd64.exe)
 - [GNU/Linux (amd64)](https://github.com/murat-cileli/dbee/releases/download/0.1/dbee_linux_amd64)
+
+### Notes
+- Contributions are welcome.
+- Follow me on [LinkedIn](https://www.linkedin.com/in/murat-cileli/)
