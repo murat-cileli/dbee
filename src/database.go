@@ -2,7 +2,7 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
+	"strings"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -10,16 +10,16 @@ import (
 
 type databaseType struct {
 	*sql.DB
-	Driver   string
-	Host     string
-	Port     string
-	User     string
-	Password string
-	Database string
+	Driver           string
+	ConnectionString string
+	Password         string
 }
 
 func (database *databaseType) Connect() error {
-	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?timeout=10s", database.User, database.Password, database.Host, database.Port, database.Database))
+	if database.Password != "" {
+		database.ConnectionString = strings.Replace(database.ConnectionString, "@", ":"+database.Password+"@", 1)
+	}
+	db, err := sql.Open(strings.ToLower(database.Driver), database.ConnectionString)
 	if err != nil {
 		return err
 	}

@@ -32,11 +32,14 @@ func (pageMain *pageMainType) build() {
 		SetTitle("Query (alt+q)").
 		SetTitleAlign(tview.AlignCenter)
 
-	textAreaQuery.SetText("SELECT * FROM table1", true)
+	textAreaQuery.SetText("SELECT * FROM pootle_store_store", true)
 
 	tableQueryResults = tview.NewTable()
-	tableQueryResults.SetTitle("Result")
+	tableQueryResults.SetTitle("Results (alt+r)")
 	tableQueryResults.SetBorders(true)
+	tableQueryResults.SetSelectable(true, false)
+	tableQueryResults.SetBordersColor(tcell.ColorDimGrey)
+	tableQueryResults.SetSelectedStyle(tcell.StyleDefault.Background(tcell.ColorDarkSlateGrey).Foreground(tcell.ColorWhite))
 
 	flexMain = tview.NewFlex().
 		AddItem(listDatabaseObjects, 0, 1, false).
@@ -81,13 +84,19 @@ func (pageMain *pageMainType) loadDatabaseObjects() {
 func (pageMain *pageMainType) loadQueryResults(rows *sql.Rows) {
 	tableQueryResults.Clear()
 
-	if rows == nil {
-		return
-	}
-
 	columns, _ := rows.Columns()
 	for i, column := range columns {
-		tableQueryResults.SetCellSimple(0, i, column)
+		tableQueryResults.SetCell(
+			0, i,
+			&tview.TableCell{
+				Text:  column,
+				Color: tcell.ColorDarkGoldenrod.TrueColor(),
+			},
+		)
+	}
+
+	if rows == nil {
+		return
 	}
 
 	columnsCount := len(columns)
@@ -106,7 +115,18 @@ func (pageMain *pageMainType) loadQueryResults(rows *sql.Rows) {
 		}
 
 		for i, cell := range values {
-			tableQueryResults.SetCellSimple(rowCount, i, cell.String)
+			cellTextColor := tcell.ColorWhite
+			if i == 0 {
+				cellTextColor = tcell.ColorDarkGoldenrod.TrueColor()
+			}
+
+			tableQueryResults.SetCell(
+				rowCount, i,
+				&tview.TableCell{
+					Text:  cell.String,
+					Color: cellTextColor,
+				},
+			)
 		}
 
 		rowCount++
