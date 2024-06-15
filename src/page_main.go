@@ -76,7 +76,7 @@ func (pageMain *pageMainType) build() {
 		if event.Key() == tcell.KeyEnter {
 			pageMain.browseDatabaseObject()
 		}
-		if event.Key() == tcell.KeyEnter && event.Modifiers() == tcell.ModShift {
+		if event.Key() == tcell.KeyCtrlSpace {
 			pageMain.describeDatabaseObject()
 		}
 		return event

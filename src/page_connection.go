@@ -74,10 +74,10 @@ func (pageConnection *pageConnectionType) build() *pageConnectionType {
 	flexConnection.SetBorderPadding(1, 1, 2, 2)
 
 	listSavedConnections.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
+		if listSavedConnections.GetItemCount() == 0 {
+			return event
+		}
 		if event.Key() == tcell.KeyEnter {
-			if listSavedConnections.GetCurrentItem() == -1 {
-				return event
-			}
 			mainText, secondaryText := listSavedConnections.GetItemText(listSavedConnections.GetCurrentItem())
 			formConnectionNew.GetFormItemByLabel("Driver").(*tview.DropDown).SetCurrentOption(slices.Index(databaseDrivers, secondaryText))
 			formConnectionNew.GetFormItemByLabel("Connection (*)").(*tview.InputField).SetText(mainText)
