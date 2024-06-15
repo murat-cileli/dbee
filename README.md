@@ -12,9 +12,9 @@ DBee is a terminal-based TUI application written in Go, designed for connecting 
 - Supports MySQL, MariaDB, and PostgreSQL
 - Keyboard-centric workflow
 - Save connections (except passwords)
-- List database tables and views
-- View table structures and browse data
-- Execute SQL queries
+- List database tables and views  
+- View table structures and browse data  
+- Execute SQL queries  
 - Fixed columns in results table  
   
 [](https://github.com/murat-cileli/dbee/assets/6532000/d9d2cd86-e505-471d-91e4-d56cf8d34725)  
@@ -22,17 +22,17 @@ DBee is a terminal-based TUI application written in Go, designed for connecting 
 ## Keyboard Shortcuts
 
 **Connections Page - Saved Connections Pane**  
-<kbd>Alt</kbd> + <kbd>S</kbd> : Focus saved connections panel  
+<kbd>Alt</kbd> + <kbd>S</kbd> : Focus saved connections pane  
 <kbd>1 .. Z</kbd> : Selects saved connection  
 <kbd>Enter</kbd> : Apply saved connection  
 
 **Connections Page - Connect to Server Pane**  
-<kbd>Alt</kbd> + <kbd>D</kbd> : Focus connection details panel  
-<kbd>Tab</kbd> : Focus next input field (on connection details panel)  
+<kbd>Alt</kbd> + <kbd>D</kbd> : Focus connect to server pane  
+<kbd>Tab</kbd> : Focus next input field  
 
 **Main Page - Database Objects Pane**  
-<kbd>Alt</kbd> + <kbd>W</kbd> : Focus database objects panel  
-<kbd>1 .. Z</kbd> : Selects a table/view 
+<kbd>Alt</kbd> + <kbd>W</kbd> : Focus database objects pane  
+<kbd>1 .. Z</kbd> : Selects a table/view  
 <kbd>Enter</kbd> : Browse top 10 table/view rows  
 <kbd>Ctrl</kbd> + <kbd>Space</kbd>: View table/view structure
 
