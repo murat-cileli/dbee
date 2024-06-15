@@ -32,9 +32,9 @@ DBee is a terminal-based TUI application written in Go, designed for connecting 
 
 **Main Page - Database Objects Pane**  
 <kbd>Alt</kbd> + <kbd>W</kbd> : Focus database objects panel  
-<kbd>1 .. Z</kbd> : Selects an object  
-<kbd>Enter</kbd> : Browse top 10 database object rows  
-<kbd>Ctrl</kbd> + <kbd>Space</kbd>: Browse top 10 database object rows  
+<kbd>1 .. Z</kbd> : Selects a table/view 
+<kbd>Enter</kbd> : Browse top 10 table/view rows  
+<kbd>Ctrl</kbd> + <kbd>Space</kbd>: View table/view structure
 
 **Main Page - Query Pane**  
 <kbd>Alt</kbd> + <kbd>Q</kbd> : Focus query pane  
