@@ -41,12 +41,7 @@ func (database *databaseType) Connect() error {
 func (database *databaseType) Query(query string) *sql.Rows {
 	rows, err := database.DB.Query(query)
 	if err != nil {
-		alertError.SetText(err.Error())
-		alertError.SetDoneFunc(func(buttonIndex int, buttonLabel string) {
-			pages.HidePage("alertError")
-			pages.ShowPage("main")
-		})
-		pages.ShowPage("alertError")
+		pageAlert.show(err.Error(), "error")
 		return nil
 	}
 
