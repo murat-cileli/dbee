@@ -15,6 +15,8 @@ type databaseType struct {
 	Password         string
 }
 
+var database databaseType
+
 func (database *databaseType) Connect() error {
 	connectionString := database.ConnectionString
 	if database.Password != "" {
@@ -40,16 +42,15 @@ func (database *databaseType) Connect() error {
 	return nil
 }
 
-func (database *databaseType) Query(query string) *sql.Rows {
+func (database *databaseType) Query(query string) (*sql.Rows, error) {
 	rows, err := database.DB.Query(query)
 	if err != nil {
 		pageAlert.show(err.Error(), "error")
-		return nil
 	}
 
-	return rows
+	return rows, err
 }
 
-func (database *databaseType) getTables() *sql.Rows {
+func (database *databaseType) getTables() (*sql.Rows, error) {
 	return database.Query("SHOW TABLES")
 }

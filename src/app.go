@@ -5,13 +5,16 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
 )
 
 type applicationType struct{}
 
 var app *tview.Application
+var pages *tview.Pages
+var pageConnection pageConnectionType
+var pageMain pageMainType
+var pageAlert pageAlertType
 var listShortcuts = []rune{'1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
 
 func (application *applicationType) init() {
@@ -20,8 +23,6 @@ func (application *applicationType) init() {
 	pages = tview.NewPages()
 	pageAlert.build()
 	pageConnection.build().show()
-
-	tview.Styles.PrimitiveBackgroundColor = tcell.ColorNone.TrueColor()
 
 	if err := app.SetRoot(pages, true).EnableMouse(true).EnablePaste(true).Run(); err != nil {
 		panic(err)

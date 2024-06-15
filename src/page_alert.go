@@ -20,14 +20,17 @@ func (pageAlert *pageAlertType) build() {
 
 func (pageAlert *pageAlertType) show(message string, alertType string) {
 	if alertType == "error" {
-		pageAlert.Modal.Box.SetBackgroundColor(tcell.ColorDarkRed)
-		pageAlert.Modal.SetBackgroundColor(tcell.ColorDarkRed)
+		pageAlert.Modal.Box.SetBackgroundColor(tcell.ColorDarkRed.TrueColor())
+		pageAlert.Modal.SetBackgroundColor(tcell.ColorDarkRed.TrueColor())
 		pageAlert.Modal.SetTitle("Error")
 	} else {
-		pageAlert.Modal.Box.SetBackgroundColor(tcell.ColorDarkBlue)
-		pageAlert.Modal.SetBackgroundColor(tcell.ColorDarkBlue)
+		pageAlert.Modal.Box.SetBackgroundColor(tcell.ColorDarkBlue.TrueColor())
+		pageAlert.Modal.SetBackgroundColor(tcell.ColorDarkBlue.TrueColor())
 		pageAlert.Modal.SetTitle("Info")
 	}
+	pageAlert.Modal.Box.SetBorderColor(tcell.ColorWhite.TrueColor())
+	pageAlert.SetTitleColor(tcell.ColorWhite.TrueColor())
+	pageAlert.Modal.SetTextColor(tcell.ColorWhite.TrueColor())
 	pageAlert.Modal.SetText(message)
 	pages.ShowPage("alert").SendToFront("alert")
 }
