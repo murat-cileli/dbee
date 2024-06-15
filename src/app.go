@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"os"
 	"path/filepath"
 
@@ -11,6 +12,7 @@ import (
 type applicationType struct{}
 
 var app *tview.Application
+var listShortcuts = []rune{'1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
 
 func (application *applicationType) init() {
 	app = tview.NewApplication()
@@ -21,7 +23,7 @@ func (application *applicationType) init() {
 
 	tview.Styles.PrimitiveBackgroundColor = tcell.ColorNone.TrueColor()
 
-	if err := app.SetRoot(pages, true).SetFocus(pages).EnableMouse(true).EnablePaste(true).Run(); err != nil {
+	if err := app.SetRoot(pages, true).EnableMouse(true).EnablePaste(true).Run(); err != nil {
 		panic(err)
 	}
 }
@@ -52,4 +54,20 @@ func (application *applicationType) getAppConfigDir() string {
 	}
 
 	return appConfigDir
+}
+
+func (application *applicationType) getSavedConnections() []string {
+	file, err := os.Open(filepath.Join(application.getAppConfigDir(), "connections"))
+	if err != nil {
+		return nil
+	}
+	defer file.Close()
+
+	var connections []string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		connections = append(connections, scanner.Text())
+	}
+
+	return connections
 }

@@ -62,8 +62,7 @@ func (pageMain *pageMainType) build() {
 }
 
 func (pageMain *pageMainType) loadDatabaseObjects() {
-	objectsShortcuts := []rune{'1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'}
-	objectShortcutIndex := 0
+	listShortcutIndex := 0
 	shortcutRune := rune(0)
 
 	tables := database.getTables()
@@ -71,9 +70,9 @@ func (pageMain *pageMainType) loadDatabaseObjects() {
 		table := ""
 		tables.Scan(&table)
 		shortcutRune = rune(0)
-		if objectShortcutIndex < len(objectsShortcuts) {
-			shortcutRune = objectsShortcuts[objectShortcutIndex]
-			objectShortcutIndex++
+		if listShortcutIndex < len(listShortcuts) {
+			shortcutRune = listShortcuts[listShortcutIndex]
+			listShortcutIndex++
 		}
 		listDatabaseObjects.
 			AddItem(table, "", shortcutRune, nil).

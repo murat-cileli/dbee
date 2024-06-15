@@ -16,10 +16,12 @@ type databaseType struct {
 }
 
 func (database *databaseType) Connect() error {
+	connectionString := database.ConnectionString
 	if database.Password != "" {
-		database.ConnectionString = strings.Replace(database.ConnectionString, "@", ":"+database.Password+"@", 1)
+		connectionString = strings.Replace(connectionString, "@", ":"+database.Password+"@", 1)
+		database.Password = ""
 	}
-	db, err := sql.Open(strings.ToLower(database.Driver), database.ConnectionString)
+	db, err := sql.Open(strings.ToLower(database.Driver), connectionString)
 	if err != nil {
 		return err
 	}
