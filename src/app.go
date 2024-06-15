@@ -29,7 +29,7 @@ func (application *applicationType) init() {
 	}
 }
 
-func (application *applicationType) saveConnection(databaseDriver string, connectionString string) {
+func (application *applicationType) saveConnection() {
 	file, err := os.OpenFile(filepath.Join(application.getAppConfigDir(), "connections"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0600)
 	if err != nil {
 		pageAlert.show(err.Error(), "error")
@@ -37,7 +37,7 @@ func (application *applicationType) saveConnection(databaseDriver string, connec
 	}
 	defer file.Close()
 
-	if _, err := file.WriteString(databaseDriver + "|||" + connectionString + "\n"); err != nil {
+	if _, err := file.WriteString(database.DriverName + " " + database.Host + " " + database.User + " " + database.Database + "\n"); err != nil {
 		pageAlert.show(err.Error(), "error")
 	}
 }

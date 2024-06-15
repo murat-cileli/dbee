@@ -95,7 +95,13 @@ func (pageMain *pageMainType) build() {
 
 func (pageMain *pageMainType) describeDatabaseObject() {
 	selectedObject, _ := listDatabaseObjects.GetItemText(listDatabaseObjects.GetCurrentItem())
-	results, err := database.Query("DESCRIBE " + selectedObject)
+	query := ""
+	if database.DriverName == "MySQL/MariaDB" {
+		query = "DESCRIBE " + selectedObject
+	} else if database.DriverName == "PostgreSQL" {
+		query = "SELECT * FROM information_schema.columns WHERE table_name = '" + selectedObject + "'"
+	}
+	results, err := database.Query(query)
 	if err == nil {
 		pageMain.loadQueryResults(results)
 	}

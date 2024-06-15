@@ -11,7 +11,7 @@ import (
 var formConnectionNew *tview.Form
 var listSavedConnections *tview.List
 var flexConnection *tview.Flex
-var databaseDrivers = []string{"MySQL", "PostgreSQL"}
+var databaseDrivers = []string{"MySQL/MariaDB", "PostgreSQL"}
 
 type pageConnectionType struct{}
 
@@ -25,11 +25,11 @@ func (pageConnection *pageConnectionType) build() *pageConnectionType {
 		listShortcutIndex := 1
 		shortcutRune := '1'
 		for _, savedConnection := range savedConnections {
-			connectionString := strings.Split(savedConnection, "|||")
-			if len(connectionString) != 2 {
+			connectionString := strings.Split(savedConnection, " ")
+			if len(connectionString) != 4 {
 				continue
 			}
-			listSavedConnections.AddItem(connectionString[1], connectionString[0], rune(shortcutRune), nil)
+			listSavedConnections.AddItem(connectionString[2]+"@"+connectionString[1]+"/"+connectionString[3], connectionString[0], rune(shortcutRune), nil)
 			if listShortcutIndex < len(listShortcuts) {
 				shortcutRune = listShortcuts[listShortcutIndex]
 				listShortcutIndex++
@@ -39,19 +39,23 @@ func (pageConnection *pageConnectionType) build() *pageConnectionType {
 
 	formConnectionNew = tview.NewForm().
 		AddDropDown("Driver", databaseDrivers, 0, nil).
-		AddInputField("Connection (*)", "", 0, nil, nil).
+		AddInputField("Host (*)", "", 0, nil, nil).
+		AddInputField("User (*)", "", 0, nil, nil).
 		AddPasswordField("Password", "", 0, '*', nil).
+		AddInputField("Database (*)", "", 0, nil, nil).
 		AddButton("Connect", func() {
-			_, database.Driver = formConnectionNew.GetFormItemByLabel("Driver").(*tview.DropDown).GetCurrentOption()
-			database.ConnectionString = formConnectionNew.GetFormItemByLabel("Connection (*)").(*tview.InputField).GetText()
+			_, database.DriverName = formConnectionNew.GetFormItemByLabel("Driver").(*tview.DropDown).GetCurrentOption()
+			database.Host = formConnectionNew.GetFormItemByLabel("Host (*)").(*tview.InputField).GetText()
+			database.User = formConnectionNew.GetFormItemByLabel("User (*)").(*tview.InputField).GetText()
 			database.Password = formConnectionNew.GetFormItemByLabel("Password").(*tview.InputField).GetText()
+			database.Database = formConnectionNew.GetFormItemByLabel("Database (*)").(*tview.InputField).GetText()
 			err := database.Connect()
 			if err != nil {
 				pageAlert.show(err.Error(), "error")
 				return
 			} else {
 				if formConnectionNew.GetFormItemByLabel("Save connection").(*tview.Checkbox).IsChecked() {
-					application.saveConnection(database.Driver, database.ConnectionString)
+					application.saveConnection()
 				}
 				pageMain.build()
 				pages.ShowPage("main")
@@ -78,10 +82,15 @@ func (pageConnection *pageConnectionType) build() *pageConnectionType {
 			return event
 		}
 		if event.Key() == tcell.KeyEnter {
+			// user@host/database
 			mainText, secondaryText := listSavedConnections.GetItemText(listSavedConnections.GetCurrentItem())
+			mainTextPartsUserAndHost := strings.Split(mainText, "@")
+			mainTextPartsHostAndDatabase := strings.Split(mainTextPartsUserAndHost[1], "/")
 			formConnectionNew.GetFormItemByLabel("Driver").(*tview.DropDown).SetCurrentOption(slices.Index(databaseDrivers, secondaryText))
-			formConnectionNew.GetFormItemByLabel("Connection (*)").(*tview.InputField).SetText(mainText)
+			formConnectionNew.GetFormItemByLabel("Host (*)").(*tview.InputField).SetText(mainTextPartsHostAndDatabase[0])
+			formConnectionNew.GetFormItemByLabel("User (*)").(*tview.InputField).SetText(mainTextPartsUserAndHost[0])
 			formConnectionNew.GetFormItemByLabel("Password").(*tview.InputField).SetText("")
+			formConnectionNew.GetFormItemByLabel("Database (*)").(*tview.InputField).SetText(mainTextPartsHostAndDatabase[1])
 			app.SetFocus(formConnectionNew)
 			app.SetFocus(formConnectionNew.GetFormItemByLabel("Password"))
 		}
@@ -104,7 +113,6 @@ func (pageConnection *pageConnectionType) build() *pageConnectionType {
 	} else {
 		app.SetFocus(formConnectionNew)
 		app.SetFocus(formConnectionNew.GetFormItemByLabel("Connection (*)"))
-		formConnectionNew.GetFormItemByLabel("Connection (*)").(*tview.InputField).SetText("USER@tcp(HOST:PORT)/DBNAME")
 	}
 
 	pages.AddPage("connection", flexConnection, true, false)
