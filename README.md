@@ -47,8 +47,15 @@ DBee is a terminal-based TUI application written in Go, designed for connecting 
 <kbd>Arrow Keys</kbd>, <kbd>Home/End</kbd>, <kbd>Page Up/Page Down</kbd> : Navigate table
 
 ### Download
-- [Windows (amd64)](https://github.com/murat-cileli/dbee/releases/download/0.1/dbee_windows_amd64.exe)
-- [GNU/Linux (amd64)](https://github.com/murat-cileli/dbee/releases/download/0.1/dbee_linux_amd64)
+- [Linux (amd64)](https://github.com/murat-cileli/dbee/blob/main/bin/linux-amd64/dbee)
+- [macOS (amd64)](https://github.com/murat-cileli/dbee/blob/main/bin/darwin-amd64/dbee)
+- [Windows (amd64)](https://github.com/murat-cileli/dbee/blob/main/bin/windows-amd64/dbee.exe)
+
+# Building From Source
+```console
+git clone https://github.com/murat-cileli/dbee.git
+make build
+```
 
 ### Notes
 - Contributions are welcome.
