@@ -46,14 +46,14 @@ DBee is a terminal-based TUI application written in Go, designed for connecting 
 <kbd>Alt</kbd> + <kbd>R</kbd> : Focus results table  
 <kbd>Arrow Keys</kbd>, <kbd>Home/End</kbd>, <kbd>Page Up/Page Down</kbd> : Navigate table
 
-### Download 64-Bit Binaries (amd64)
-- [Linux](https://github.com/murat-cileli/dbee/blob/main/bin/linux-amd64/dbee)
-- [macOS](https://github.com/murat-cileli/dbee/blob/main/bin/darwin-amd64/dbee)
-- [Windows](https://github.com/murat-cileli/dbee/blob/main/bin/windows-amd64/dbee.exe)
+### Download Binaries
 
-### Download 32-Bit Binaries (i386)
-- [Linux](https://github.com/murat-cileli/dbee/blob/main/bin/linux-i386/dbee)
-- [Windows](https://github.com/murat-cileli/dbee/blob/main/bin/windows-i386/dbee.exe)
+|<!-- -->	|<!-- -->	|<!-- -->	|<!-- -->	|<!-- -->	|
+|---------	|:-----:	|:----:	|:-----:	|:---:	|
+| Linux   	| **amd64** 	| i386 	| arm64 	| arm 	|
+| FreeBSD 	| **amd64** 	| i386 	| arm64 	| arm 	|
+| macOS   	| **amd64** 	|   -  	| arm64 	|  -  	|
+| Windows 	| **amd64** 	| i386 	| arm64 	| arm 	|
 
 # Building From Source
 ```console
