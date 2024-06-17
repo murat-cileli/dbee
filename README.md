@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="[DBee](https://github.com/murat-cileli/dbee/assets/6532000/8f7a7d54-0904-4296-a6bb-6836ee86a095)" />
+  <img src="https://github.com/murat-cileli/dbee/assets/6532000/8f7a7d54-0904-4296-a6bb-6836ee86a095" />
   <br>
   <strong>DBee - TUI Database Browser</strong>
 </p>
