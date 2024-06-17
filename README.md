@@ -19,6 +19,15 @@ DBee is a terminal-based TUI application written in Go, designed for connecting 
   
 [](https://github.com/murat-cileli/dbee/assets/6532000/d9d2cd86-e505-471d-91e4-d56cf8d34725)  
 
+### Download Binaries
+
+|	|	| | | |
+|---------	|:-----:	|:----:	|:-----:	|:---:	|
+| Linux 	| **[amd64](https://github.com/murat-cileli/dbee/blob/main/bin/linux-amd64/dbee)** 	| [i386](https://github.com/murat-cileli/dbee/blob/main/bin/linux-i386/dbee) 	| [arm64](https://github.com/murat-cileli/dbee/blob/main/bin/linux-arm64/dbee) 	| [arm](https://github.com/murat-cileli/dbee/blob/main/bin/linux-arm/dbee) 	|
+| FreeBSD   	| [**amd64**](https://github.com/murat-cileli/dbee/blob/main/bin/freebsd-amd64/dbee) 	| [i386](https://github.com/murat-cileli/dbee/blob/main/bin/freebsd-i386/dbee) 	| [arm64](https://github.com/murat-cileli/dbee/blob/main/bin/freebsd-arm64/dbee) 	| [arm](https://github.com/murat-cileli/dbee/blob/main/bin/freebsd-arm/dbee) 	|
+| macOS   	| [**amd64**](https://github.com/murat-cileli/dbee/blob/main/bin/darwin-amd64/dbee) 	|   -  	| [arm64](https://github.com/murat-cileli/dbee/blob/main/bin/darwin-arm64/dbee) 	|  -  	|
+| Windows 	| [**amd64**](https://github.com/murat-cileli/dbee/blob/main/bin/windows-amd64/dbee.exe) 	| [i386](https://github.com/murat-cileli/dbee/blob/main/bin/windows-i386/dbee.exe) 	| [arm64](https://github.com/murat-cileli/dbee/blob/main/bin/windows-arm64/dbee.exe) 	| [arm](https://github.com/murat-cileli/dbee/blob/main/bin/windows-arm/dbee.exe) 	|
+
 ## Keyboard Shortcuts
 
 **Connections Page - Saved Connections Pane**  
@@ -45,15 +54,6 @@ DBee is a terminal-based TUI application written in Go, designed for connecting 
 **Main Page - Results Table**  
 <kbd>Alt</kbd> + <kbd>R</kbd> : Focus results table  
 <kbd>Arrow Keys</kbd>, <kbd>Home/End</kbd>, <kbd>Page Up/Page Down</kbd> : Navigate table
-
-### Download Binaries
-
-|<!-- -->	|<!-- -->	|<!-- -->	|<!-- -->	|<!-- -->	|
-|---------	|:-----:	|:----:	|:-----:	|:---:	|
-| Linux   	| **amd64** 	| i386 	| arm64 	| arm 	|
-| FreeBSD 	| **amd64** 	| i386 	| arm64 	| arm 	|
-| macOS   	| **amd64** 	|   -  	| arm64 	|  -  	|
-| Windows 	| **amd64** 	| i386 	| arm64 	| arm 	|
 
 # Building From Source
 ```console
