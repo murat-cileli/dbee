@@ -1,4 +1,4 @@
-build:
+build:	clean
 	GOARCH=amd64 GOOS=linux go build -C src -o ../bin/linux-amd64/dbee
 	GOARCH=amd64 GOOS=freebsd go build -C src -o ../bin/freebsd-amd64/dbee
 	GOARCH=amd64 GOOS=darwin go build -C src -o ../bin/darwin-amd64/dbee
@@ -17,5 +17,3 @@ build:
 clean:
 	go clean
 	rm -rf ./bin/*
-
-re: clean build
