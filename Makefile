@@ -17,3 +17,5 @@ build:
 clean:
 	go clean
 	rm -rf ./bin/*
+
+re: clean build
