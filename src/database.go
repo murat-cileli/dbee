@@ -52,10 +52,13 @@ func (database *databaseType) Connect() error {
 	return nil
 }
 
-func (database *databaseType) Query(query string) (*sql.Rows, error) {
+func (database *databaseType) Query(query string, addToHistory bool) (*sql.Rows, error) {
 	rows, err := database.DB.Query(query)
 	if err != nil {
 		pageAlert.show(err.Error(), "error")
+	} else if addToHistory {
+		queryHistory.add(query)
+		queryHistory.resetIndex()
 	}
 
 	return rows, err
@@ -68,5 +71,5 @@ func (database *databaseType) getTables() (*sql.Rows, error) {
 	} else if database.Driver == "postgres" {
 		query = "SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema'"
 	}
-	return database.Query(query)
+	return database.Query(query, false)
 }

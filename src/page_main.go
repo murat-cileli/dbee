@@ -65,9 +65,19 @@ func (pageMain *pageMainType) build() {
 	textAreaQuery.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		if event.Key() == tcell.KeyEnter && event.Modifiers() == tcell.ModAlt {
 			event = nil
-			results, err := database.Query(textAreaQuery.GetText())
+			results, err := database.Query(textAreaQuery.GetText(), true)
 			if err == nil {
 				pageMain.loadQueryResults(results)
+			}
+		} else if event.Key() == tcell.KeyUp && event.Modifiers() == tcell.ModAlt {
+			queryHistory := queryHistory.back()
+			if queryHistory != "" {
+				textAreaQuery.SetText(queryHistory, true)
+			}
+		} else if event.Key() == tcell.KeyDown && event.Modifiers() == tcell.ModAlt {
+			queryHistory := queryHistory.forward()
+			if queryHistory != "" {
+				textAreaQuery.SetText(queryHistory, true)
 			}
 		}
 		return event
@@ -102,7 +112,7 @@ func (pageMain *pageMainType) describeDatabaseObject() {
 	} else if database.DriverName == "PostgreSQL" {
 		query = "SELECT * FROM information_schema.columns WHERE table_name = '" + selectedObject + "'"
 	}
-	results, err := database.Query(query)
+	results, err := database.Query(query, false)
 	if err == nil {
 		pageMain.loadQueryResults(results)
 	}
@@ -110,7 +120,7 @@ func (pageMain *pageMainType) describeDatabaseObject() {
 
 func (pageMain *pageMainType) browseDatabaseObject() {
 	selectedObject, _ := listDatabaseObjects.GetItemText(listDatabaseObjects.GetCurrentItem())
-	results, err := database.Query("SELECT * FROM " + selectedObject + " LIMIT 10")
+	results, err := database.Query("SELECT * FROM "+selectedObject+" LIMIT 10", false)
 	if err == nil {
 		pageMain.loadQueryResults(results)
 	}
