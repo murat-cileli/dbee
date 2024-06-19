@@ -8,12 +8,13 @@ import (
 	"github.com/rivo/tview"
 )
 
+type pageConnectionType struct{}
+
+var pageConnection pageConnectionType
 var formConnectionNew *tview.Form
 var listSavedConnections *tview.List
 var flexConnection *tview.Flex
 var databaseDrivers = []string{"MySQL/MariaDB", "PostgreSQL"}
-
-type pageConnectionType struct{}
 
 func (pageConnection *pageConnectionType) build() *pageConnectionType {
 	listSavedConnections = tview.NewList()
@@ -63,7 +64,7 @@ func (pageConnection *pageConnectionType) build() *pageConnectionType {
 			}
 		}).
 		AddButton("Quit", func() {
-			app.Stop()
+			application.ConfirmQuit()
 		}).
 		AddCheckbox("Save connection", false, nil)
 

@@ -7,12 +7,13 @@ import (
 	"github.com/rivo/tview"
 )
 
+type pageMainType struct{}
+
+var pageMain pageMainType
 var tableQueryResults *tview.Table
 var flexMain *tview.Flex
 var textAreaQuery *tview.TextArea
 var listDatabaseObjects *tview.List
-
-type pageMainType struct{}
 
 func (pageMain *pageMainType) build() {
 	listDatabaseObjects = tview.NewList()

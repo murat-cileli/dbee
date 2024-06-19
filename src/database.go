@@ -27,7 +27,7 @@ func (database *databaseType) buildConnectionString() {
 		database.ConnectionString = database.User + ":" + database.Password + "@tcp(" + database.Host + ")/" + database.Database
 	} else if database.DriverName == "PostgreSQL" {
 		database.Driver = "postgres"
-		database.ConnectionString = "host=" + database.Host + " user=" + database.User + " password=" + database.Password + " dbname=" + database.Database + " sslmode=disable"
+		database.ConnectionString = "host=" + database.Host + " user=" + database.User + " password=" + database.Password + " dbname=" + database.Database
 	}
 }
 

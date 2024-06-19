@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
 )
 
@@ -12,9 +13,6 @@ type applicationType struct{}
 
 var app *tview.Application
 var pages *tview.Pages
-var pageConnection pageConnectionType
-var pageMain pageMainType
-var pageAlert pageAlertType
 var listShortcuts = []rune{'1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
 
 func (application *applicationType) init() {
@@ -22,7 +20,20 @@ func (application *applicationType) init() {
 
 	pages = tview.NewPages()
 	pageAlert.build()
+	pageConfirm.build()
 	pageConnection.build().show()
+
+	app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
+		switch event.Key() {
+		case tcell.KeyCtrlC:
+			return nil
+		case tcell.KeyEsc:
+			application.ConfirmQuit()
+		default:
+			return event
+		}
+		return nil
+	})
 
 	if err := app.SetRoot(pages, true).EnableMouse(true).EnablePaste(true).Run(); err != nil {
 		panic(err)
@@ -71,4 +82,15 @@ func (application *applicationType) getSavedConnections() []string {
 	}
 
 	return connections
+}
+
+func (application *applicationType) ConfirmQuit() {
+	pageConfirm.show("Are you sure you want to exit?", application.Quit)
+}
+
+func (application *applicationType) Quit() {
+	if database.DB != nil {
+		database.DB.Close()
+	}
+	app.Stop()
 }

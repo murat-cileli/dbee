@@ -5,7 +5,7 @@ go 1.22.4
 require (
 	github.com/gdamore/tcell/v2 v2.7.4
 	github.com/go-sql-driver/mysql v1.8.1
-	github.com/rivo/tview v0.0.0-20240524063012-037df494fb76
+	github.com/rivo/tview v0.0.0-20240616192244-23476fa0bab2
 )
 
 require (
