@@ -22,7 +22,14 @@ func (application *applicationType) init() {
 	pageAlert.build()
 	pageConfirm.build()
 	pageConnection.build().show()
+	application.registerGlobalShortcuts()
 
+	if err := app.SetRoot(pages, true).EnableMouse(true).EnablePaste(true).Run(); err != nil {
+		panic(err)
+	}
+}
+
+func (application *applicationType) registerGlobalShortcuts() {
 	app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		switch event.Key() {
 		case tcell.KeyCtrlC:
@@ -34,10 +41,6 @@ func (application *applicationType) init() {
 		}
 		return nil
 	})
-
-	if err := app.SetRoot(pages, true).EnableMouse(true).EnablePaste(true).Run(); err != nil {
-		panic(err)
-	}
 }
 
 func (application *applicationType) saveConnection() {
