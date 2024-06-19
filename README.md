@@ -21,12 +21,12 @@ DBee is a terminal-based TUI application written in Go, designed for connecting 
 
 ### Download Binaries
 
-|	|	| | | |
-|---------	|:-----:	|:----:	|:-----:	|:---:	|
-| Linux 	| **[amd64](https://github.com/murat-cileli/dbee/blob/main/bin/linux-amd64/dbee)** 	| [i386](https://github.com/murat-cileli/dbee/blob/main/bin/linux-i386/dbee) 	| [arm64](https://github.com/murat-cileli/dbee/blob/main/bin/linux-arm64/dbee) 	| [arm](https://github.com/murat-cileli/dbee/blob/main/bin/linux-arm/dbee) 	|
-| FreeBSD   	| [**amd64**](https://github.com/murat-cileli/dbee/blob/main/bin/freebsd-amd64/dbee) 	| [i386](https://github.com/murat-cileli/dbee/blob/main/bin/freebsd-i386/dbee) 	| [arm64](https://github.com/murat-cileli/dbee/blob/main/bin/freebsd-arm64/dbee) 	| [arm](https://github.com/murat-cileli/dbee/blob/main/bin/freebsd-arm/dbee) 	|
-| macOS   	| [**amd64**](https://github.com/murat-cileli/dbee/blob/main/bin/darwin-amd64/dbee) 	|   -  	| [arm64](https://github.com/murat-cileli/dbee/blob/main/bin/darwin-arm64/dbee) 	|  -  	|
-| Windows 	| [**amd64**](https://github.com/murat-cileli/dbee/blob/main/bin/windows-amd64/dbee.exe) 	| [i386](https://github.com/murat-cileli/dbee/blob/main/bin/windows-i386/dbee.exe) 	| [arm64](https://github.com/murat-cileli/dbee/blob/main/bin/windows-arm64/dbee.exe) 	| [arm](https://github.com/murat-cileli/dbee/blob/main/bin/windows-arm/dbee.exe) 	|
+| **OS**  	|   **64-Bit**   	| **32-Bit** 	|
+|---------	|:--------------:	|:----------:	|
+| Linux   	|      **[amd64](https://github.com/murat-cileli/dbee/blob/main/bin/linux-amd64/dbee)**     	|    [i386](https://github.com/murat-cileli/dbee/blob/main/bin/linux-i386/dbee)    	|
+| FreeBSD 	|      [**amd64**](https://github.com/murat-cileli/dbee/blob/main/bin/freebsd-amd64/dbee)     	|    [i386](https://github.com/murat-cileli/dbee/blob/main/bin/freebsd-i386/dbee)    	|
+| macOS   	| [**arm64**](https://github.com/murat-cileli/dbee/blob/main/bin/darwin-arm64/dbee) \| [amd64](https://github.com/murat-cileli/dbee/blob/main/bin/darwin-amd64/dbee) 	|      -     	|
+| Windows 	|      [**amd64**](https://github.com/murat-cileli/dbee/blob/main/bin/windows-amd64/dbee.exe)     	|    [i386](https://github.com/murat-cileli/dbee/blob/main/bin/windows-i386/dbee.exe)    	|
 
 ## Keyboard Shortcuts
 
