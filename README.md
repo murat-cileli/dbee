@@ -30,28 +30,31 @@ DBee is a terminal-based TUI application written in Go, designed for connecting 
 
 ## Keyboard Shortcuts
 
-**Connections Page - Saved Connections Pane**  
+**Global**  
+<kbd>ESC</kbd> : Quit application
+
+**Connections Page -> Saved Connections Pane**  
 <kbd>Alt</kbd> + <kbd>S</kbd> : Focus saved connections pane  
 <kbd>1 .. Z</kbd> : Selects saved connection  
 <kbd>Enter</kbd> : Apply saved connection  
 
-**Connections Page - Connect to Server Pane**  
+**Connections Page -> Connect to Server Pane**  
 <kbd>Alt</kbd> + <kbd>D</kbd> : Focus connect to server pane  
 <kbd>Tab</kbd> : Focus next input field  
 
-**Main Page - Database Objects Pane**  
+**Main Page -> Database Objects Pane**  
 <kbd>Alt</kbd> + <kbd>W</kbd> : Focus database objects pane  
 <kbd>1 .. Z</kbd> : Selects a table/view  
 <kbd>Enter</kbd> : Browse top 10 table/view rows  
 <kbd>Ctrl</kbd> + <kbd>Space</kbd>: View table/view structure
 
-**Main Page - Query Pane**  
+**Main Page -> Query Pane**  
 <kbd>Alt</kbd> + <kbd>Q</kbd> : Focus query pane  
 <kbd>Alt</kbd> + <kbd>Enter</kbd> : Execute SQL query  
 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd> : Paste  
 <kbd>Ctrl</kbd> + <kbd>Z</kbd> : Undo  
 
-**Main Page - Results Table**  
+**Main Page -> Results Table**  
 <kbd>Alt</kbd> + <kbd>R</kbd> : Focus results table  
 <kbd>Arrow Keys</kbd>, <kbd>Home/End</kbd>, <kbd>Page Up/Page Down</kbd> : Navigate table
 
