@@ -32,7 +32,7 @@ func (pageMain *pageMainType) build() {
 	textAreaQuery.
 		SetPlaceholder("Type your query here, (alt+enter) to execute.").
 		SetBorder(true).
-		SetTitle("Query (alt+q)").
+		SetTitle(" [yellow]" + database.Database + "[-:-:-:-] |" + " Query (alt+q) ").
 		SetTitleAlign(tview.AlignCenter)
 
 	pagesMain = tview.NewPages()
