@@ -6,7 +6,7 @@
 
 DBee is a terminal-based TUI application written in Go, designed for connecting to MySQL, MariaDB, and PostgreSQL databases. It offers a terminal-based interface for browsing database contents and executing SQL queries.
 
-### Features
+## Features
 - Simple, lightweight, fast!
 - Single executable with no dependencies
 - Supports MySQL, MariaDB, and PostgreSQL
@@ -20,14 +20,16 @@ DBee is a terminal-based TUI application written in Go, designed for connecting 
   
 [](https://github.com/murat-cileli/dbee/assets/6532000/d9d2cd86-e505-471d-91e4-d56cf8d34725)  
 
-### Download Binaries
+## Installation
+Visit [Releases](https://github.com/murat-cileli/dbee/releases) section.
 
-| **OS**  	|   **64-Bit**   	| **32-Bit** 	|
-|---------	|:--------------:	|:----------:	|
-| Linux   	|      **[amd64](https://github.com/murat-cileli/dbee/raw/main/bin/linux-amd64/dbee)**     	|    [i386](https://github.com/murat-cileli/dbee/raw/main/bin/linux-i386/dbee)    	|
-| FreeBSD 	|      [**amd64**](https://github.com/murat-cileli/dbee/raw/main/bin/freebsd-amd64/dbee)     	|    [i386](https://github.com/murat-cileli/dbee/raw/main/bin/freebsd-i386/dbee)    	|
-| macOS   	| [**arm64**](https://github.com/murat-cileli/dbee/raw/main/bin/darwin-arm64/dbee) \| [amd64](https://github.com/murat-cileli/dbee/raw/main/bin/darwin-amd64/dbee) 	|      -     	|
-| Windows 	|      [**amd64**](https://github.com/murat-cileli/dbee/raw/main/bin/windows-amd64/dbee.exe)     	|    [i386](https://github.com/murat-cileli/dbee/raw/main/bin/windows-i386/dbee.exe)    	|
+#### Building From Source
+```console
+git clone https://github.com/murat-cileli/dbee.git
+cd src
+go build .
+./dbee
+```
 
 ## Keyboard Shortcuts
 
@@ -60,12 +62,6 @@ DBee is a terminal-based TUI application written in Go, designed for connecting 
 **Main Page -> Results Table**  
 <kbd>Alt</kbd> + <kbd>R</kbd> : Focus results table  
 <kbd>Arrow Keys</kbd>, <kbd>Home/End</kbd>, <kbd>Page Up/Page Down</kbd> : Navigate table
-
-# Building From Source
-```console
-git clone https://github.com/murat-cileli/dbee.git
-make build
-```
 
 ### Notes
 - Contributions are welcome.
