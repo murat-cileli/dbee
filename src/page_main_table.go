@@ -13,7 +13,8 @@ var tableQueryResults *tview.Table
 func (pageMainTable *pageMainTableType) build() {
 
 	tableQueryResults = tview.NewTable()
-	tableQueryResults.SetTitle("Results (alt+r)")
+	tableQueryResults.Box.SetBorder(true)
+	tableQueryResults.Box.SetTitle("Results (alt+r)")
 	tableQueryResults.SetBorders(true)
 	tableQueryResults.SetSelectable(false, false)
 	tableQueryResults.SetBackgroundColor(tcell.ColorBlack)

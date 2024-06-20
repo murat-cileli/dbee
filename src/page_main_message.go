@@ -66,12 +66,9 @@ func (pageMainMessage *pageMainMessageType) show(textAlign int, title, message s
 	switch message {
 	case "helpText":
 		textViewMessage.SetTextAlign(tview.AlignLeft)
-		textViewMessage.SetTitle("DBee v0.2 Help (alt+h)")
+		textViewMessage.SetTitle("DBee Help (alt+h)")
 		textViewMessage.SetText(pageMainMessage.helpText)
 	default:
-		if title == "" {
-			title = "System Message"
-		}
 		textViewMessage.SetTextAlign(textAlign)
 		textViewMessage.SetTitle(title)
 		textViewMessage.SetText(message)
