@@ -1,2 +1,6 @@
 .idea
 .vscode
+dist
+bin
+src/dbee
+src/dbee.exe
