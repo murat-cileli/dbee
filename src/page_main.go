@@ -50,6 +50,7 @@ func (pageMain *pageMainType) build() {
 	flexMain.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		if event.Rune() == 'w' && event.Modifiers() == tcell.ModAlt {
 			app.SetFocus(listDatabaseObjects)
+			return nil
 		}
 		if event.Rune() == 'q' && event.Modifiers() == tcell.ModAlt {
 			app.SetFocus(textAreaQuery)
@@ -58,16 +59,23 @@ func (pageMain *pageMainType) build() {
 			app.SetFocus(tableQueryResults)
 			tableQueryResults.SetSelectable(true, false)
 		}
+		if event.Rune() == 'h' && event.Modifiers() == tcell.ModAlt {
+			pagesMain.SwitchToPage("message")
+			app.SetFocus(textViewMessage)
+			pageMainMessage.show(tview.AlignLeft, "", "helpText")
+		}
 		return event
 	})
 
 	textAreaQuery.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		if event.Key() == tcell.KeyEnter && event.Modifiers() == tcell.ModAlt {
 			event = nil
+			textAreaQuery.SetDisabled(true)
 			results, err := database.Query(textAreaQuery.GetText(), true)
 			if err == nil {
 				pageMain.loadQueryResults(results)
 			}
+			textAreaQuery.SetDisabled(false)
 		} else if event.Key() == tcell.KeyUp && event.Modifiers() == tcell.ModAlt {
 			queryHistory := queryHistory.back()
 			if queryHistory != "" {
@@ -149,6 +157,8 @@ func (pageMain *pageMainType) loadQueryResults(rows *sql.Rows) {
 	if err != nil {
 		return
 	}
+
+	pagesMain.SwitchToPage("tableQueryResults")
 
 	for i, column := range columns {
 		tableQueryResults.SetCell(

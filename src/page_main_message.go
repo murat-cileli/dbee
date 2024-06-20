@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
 )
 
@@ -15,7 +14,6 @@ var textViewMessage *tview.TextView
 func (pageMainMessage *pageMainMessageType) build() {
 	textViewMessage = tview.NewTextView()
 	textViewMessage.SetBorder(true)
-	textViewMessage.SetBorderColor(tcell.ColorDarkGray)
 	textViewMessage.SetBorderPadding(1, 1, 1, 1)
 	textViewMessage.SetTitleAlign(tview.AlignCenter)
 	textViewMessage.SetRegions(true)
@@ -55,7 +53,7 @@ func (pageMainMessage *pageMainMessageType) build() {
 
 ABOUT
 
-DBee is a free and open-source project maintained by Murat Çileli and other contributors. Feel free report issues or submit feature requests on GitHub. Thank you for using DBee!
+DBee is a free and open-source project maintained by contributors. Feel free report issues or submit feature requests on GitHub. Thank you for using DBee!
 
 [yellow]GitHub[-:-:-:-]: [:::https://github.com/murat-cileli/dbee]https://github.com/murat-cileli/dbee[:::-]
 `
@@ -68,9 +66,12 @@ func (pageMainMessage *pageMainMessageType) show(textAlign int, title, message s
 	switch message {
 	case "helpText":
 		textViewMessage.SetTextAlign(tview.AlignLeft)
-		textViewMessage.SetTitle("DBee v0.2")
+		textViewMessage.SetTitle("DBee v0.2 Help (alt+h)")
 		textViewMessage.SetText(pageMainMessage.helpText)
 	default:
+		if title == "" {
+			title = "System Message"
+		}
 		textViewMessage.SetTextAlign(textAlign)
 		textViewMessage.SetTitle(title)
 		textViewMessage.SetText(message)

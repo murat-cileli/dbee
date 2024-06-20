@@ -53,13 +53,25 @@ func (database *databaseType) Connect() error {
 	return nil
 }
 
-func (database *databaseType) Query(query string, addToHistory bool) (*sql.Rows, error) {
+func (database *databaseType) Query(query string, isCustomQuery bool) (*sql.Rows, error) {
+	if isCustomQuery {
+		pageMainMessage.show(tview.AlignLeft, "Querying...", "[yellow::l]Executing query...[-:-:-:-] ")
+		app.Sync().ForceDraw()
+	}
+
 	rows, err := database.DB.Query(query)
+
 	if err != nil {
-		pageMainMessage.show(tview.AlignLeft, "", "[red]Error Message:[-:-:-:-] "+err.Error()+"\n\n[yellow]Executed Query[-:-:-:-]: "+query)
-	} else if addToHistory {
-		queryHistory.add(query)
-		queryHistory.resetIndex()
+		pageMainMessage.show(tview.AlignLeft, "", "[red]ERROR![-:-:-:-] "+err.Error()+"\n\n[yellow]Executed Query[-:-:-:-]: "+query)
+	} else {
+		if isCustomQuery {
+			queryHistory.add(query)
+			queryHistory.resetIndex()
+		}
+		columns, errColumns := rows.Columns()
+		if errColumns == nil && len(columns) == 0 {
+			pageMainMessage.show(tview.AlignLeft, "", "[green]Query executed successfully![-:-:-:-] No rows returned.\n\n[green]Executed Query[-:-:-:-]: "+query)
+		}
 	}
 
 	return rows, err
