@@ -119,7 +119,7 @@ func (pageMain *pageMainType) describeDatabaseObject() {
 
 func (pageMain *pageMainType) browseDatabaseObject() {
 	selectedObject, _ := listDatabaseObjects.GetItemText(listDatabaseObjects.GetCurrentItem())
-	results, err := database.Query("SELECT * FROM "+selectedObject+" LIMIT 10", false)
+	results, err := database.Query("SELECT * FROM "+selectedObject+" LIMIT 5", false)
 	if err == nil {
 		pageMain.loadQueryResults(results)
 	}

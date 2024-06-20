@@ -48,7 +48,7 @@ go build .
 **Main Page -> Database Objects Pane**  
 <kbd>Alt</kbd> + <kbd>W</kbd> : Focus database objects pane  
 <kbd>1 .. Z</kbd> : Selects a table/view  
-<kbd>Enter</kbd> : Browse top 10 table/view rows  
+<kbd>Enter</kbd> : Browse top 5 table/view rows  
 <kbd>Ctrl</kbd> + <kbd>Space</kbd>: View table/view structure
 
 **Main Page -> Query Pane**  
