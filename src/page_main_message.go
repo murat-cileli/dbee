@@ -30,7 +30,7 @@ func (pageMainMessage *pageMainMessageType) build() {
 
 [green]Main UI:[-:-:-:-]
 [yellow]alt + w[-:-:-:-]: Focus on the objects list.
-[yellow]alt + q[-:-:-:-]: Focus on the query text area.
+[yellow]alt + s[-:-:-:-]: Focus on the query text area.
 [yellow]alt + r[-:-:-:-]: Focus on the results table.
 [yellow]alt + h[-:-:-:-]: Show this help message.
 
@@ -41,7 +41,7 @@ func (pageMainMessage *pageMainMessageType) build() {
 
 [green]Object List:[-:-:-:-]
 [yellow]1..9, a..z[-:-:-:-]: Select an object.
-[yellow]enter[-:-:-:-]: Browse top 10 rows of the selected object.
+[yellow]enter[-:-:-:-]: Browse top 5 rows of the selected object.
 [yellow]ctrl + space[-:-:-:-]: View selected object's structure.
 
 [green]Connections:[-:-:-:-]
