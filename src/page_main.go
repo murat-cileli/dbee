@@ -32,7 +32,7 @@ func (pageMain *pageMainType) build() {
 	textAreaQuery.
 		SetPlaceholder("Type your query here, (alt+enter) to execute.").
 		SetBorder(true).
-		SetTitle(" [yellow]" + database.Database + "[-:-:-:-] |" + " Query (alt+q) ").
+		SetTitle(" [yellow]" + database.Database + "[-:-:-:-] |" + " Query (alt+e) ").
 		SetTitleAlign(tview.AlignCenter)
 
 	pagesMain = tview.NewPages()
@@ -52,7 +52,7 @@ func (pageMain *pageMainType) build() {
 			app.SetFocus(listDatabaseObjects)
 			return nil
 		}
-		if event.Rune() == 'q' && event.Modifiers() == tcell.ModAlt {
+		if event.Rune() == 'e' && event.Modifiers() == tcell.ModAlt {
 			app.SetFocus(textAreaQuery)
 		}
 		if event.Rune() == 'r' && event.Modifiers() == tcell.ModAlt {

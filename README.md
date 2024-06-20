@@ -52,7 +52,7 @@ go build .
 <kbd>Ctrl</kbd> + <kbd>Space</kbd>: View table/view structure
 
 **Main Page -> Query Pane**  
-<kbd>Alt</kbd> + <kbd>Q</kbd> : Focus query pane  
+<kbd>Alt</kbd> + <kbd>E</kbd> : Focus query pane  
 <kbd>Alt</kbd> + <kbd>Enter</kbd> : Execute SQL query  
 <kbd>Alt</kbd> + <kbd>Up</kbd> : Go back in query history  
 <kbd>Alt</kbd> + <kbd>Down</kbd> : Go forward in query history  
