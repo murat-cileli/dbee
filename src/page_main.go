@@ -10,10 +10,10 @@ import (
 type pageMainType struct{}
 
 var pageMain pageMainType
-var tableQueryResults *tview.Table
 var flexMain *tview.Flex
 var textAreaQuery *tview.TextArea
 var listDatabaseObjects *tview.List
+var pagesMain *tview.Pages
 
 func (pageMain *pageMainType) build() {
 	listDatabaseObjects = tview.NewList()
@@ -35,17 +35,16 @@ func (pageMain *pageMainType) build() {
 		SetTitle("Query (alt+q)").
 		SetTitleAlign(tview.AlignCenter)
 
-	tableQueryResults = tview.NewTable()
-	tableQueryResults.SetTitle("Results (alt+r)")
-	tableQueryResults.SetBorders(true)
-	tableQueryResults.SetSelectable(false, false)
-	tableQueryResults.SetBackgroundColor(tcell.ColorBlack)
+	pagesMain = tview.NewPages()
+	pageMainTable.build()
+	pageMainMessage.build()
+	pageMainMessage.show(tview.AlignCenter, "", "helpText")
 
 	flexMain = tview.NewFlex().
 		AddItem(listDatabaseObjects, 0, 1, false).
 		AddItem(tview.NewFlex().SetDirection(tview.FlexRow).
 			AddItem(textAreaQuery, 0, 1, true).
-			AddItem(tableQueryResults, 0, 4, true).
+			AddItem(pagesMain, 0, 4, true).
 			AddItem(tview.NewBox(), 0, 0, false), 0, 2, false)
 
 	flexMain.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
@@ -93,15 +92,7 @@ func (pageMain *pageMainType) build() {
 		return event
 	})
 
-	tableQueryResults.SetFocusFunc(func() {
-		tableQueryResults.SetSelectable(true, false)
-	})
-
-	tableQueryResults.SetBlurFunc(func() {
-		tableQueryResults.SetSelectable(false, false)
-	})
-
-	pages.AddPage("main", flexMain, true, false)
+	pagesApp.AddPage("main", flexMain, true, false)
 }
 
 func (pageMain *pageMainType) describeDatabaseObject() {

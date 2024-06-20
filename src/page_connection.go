@@ -59,7 +59,7 @@ func (pageConnection *pageConnectionType) build() *pageConnectionType {
 					application.saveConnection()
 				}
 				pageMain.build()
-				pages.ShowPage("main")
+				pagesApp.ShowPage("main")
 				app.SetFocus(textAreaQuery)
 			}
 		}).
@@ -116,11 +116,11 @@ func (pageConnection *pageConnectionType) build() *pageConnectionType {
 		app.SetFocus(formConnectionNew.GetFormItemByLabel("Connection (*)"))
 	}
 
-	pages.AddPage("connection", flexConnection, true, false)
+	pagesApp.AddPage("connection", flexConnection, true, false)
 
 	return pageConnection
 }
 
 func (pageConnection *pageConnectionType) show() {
-	pages.ShowPage("connection")
+	pagesApp.ShowPage("connection")
 }

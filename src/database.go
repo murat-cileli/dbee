@@ -6,6 +6,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
+	"github.com/rivo/tview"
 )
 
 type databaseType struct {
@@ -55,7 +56,7 @@ func (database *databaseType) Connect() error {
 func (database *databaseType) Query(query string, addToHistory bool) (*sql.Rows, error) {
 	rows, err := database.DB.Query(query)
 	if err != nil {
-		pageAlert.show(err.Error(), "error")
+		pageMainMessage.show(tview.AlignLeft, "", "[red]Error Message:[-:-:-:-] "+err.Error()+"\n\n[yellow]Executed Query[-:-:-:-]: "+query)
 	} else if addToHistory {
 		queryHistory.add(query)
 		queryHistory.resetIndex()

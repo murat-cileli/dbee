@@ -18,9 +18,9 @@ func (pageAlert *pageAlertType) build() {
 	pageAlert.SetTitleColor(tcell.ColorWhite.TrueColor())
 	pageAlert.Modal.SetTextColor(tcell.ColorWhite.TrueColor())
 	pageAlert.Modal.SetDoneFunc(func(buttonIndex int, buttonLabel string) {
-		pages.HidePage("alert")
+		pagesApp.HidePage("alert")
 	})
-	pages.AddPage("alert", pageAlert.Modal, true, false)
+	pagesApp.AddPage("alert", pageAlert.Modal, true, false)
 }
 
 func (pageAlert *pageAlertType) show(message string, alertType string) {
@@ -34,5 +34,5 @@ func (pageAlert *pageAlertType) show(message string, alertType string) {
 		pageAlert.Modal.SetTitle("Info")
 	}
 	pageAlert.Modal.SetText(message)
-	pages.ShowPage("alert").SendToFront("alert")
+	pagesApp.ShowPage("alert").SendToFront("alert")
 }
