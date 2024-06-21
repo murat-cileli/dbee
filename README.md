@@ -3,7 +3,7 @@
   <br>
   <strong>DBee</strong>
   <br>
-  Fast & Minimalist Database Browser
+  Fast & Minimalistic Database Browser
 </p>
 
 ### 🐝 Features
