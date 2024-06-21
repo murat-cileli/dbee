@@ -6,7 +6,7 @@
   Fast & Minimalist Database Browser
 </p>
 
-## Features
+### 🐝 Features
 - Simple, lightweight, fast!
 - Keyboard-centric workflow
 - Single executable with no dependencies
@@ -16,16 +16,17 @@
 - View table structures and browse data  
 - Execute SQL queries  
 - SQL query history
-- Fixed columns in results table  
+
+### 🐝 Screenshots
 
 | Connection 	| Main 	| Results 	|
 |------------	|:----:	|:-------:	|
-| ![screenshot-24-06-21-053336](https://github.com/murat-cileli/dbee/assets/6532000/38842b6c-54d2-4be9-9c40-f9c9f679a3d9) | ![screenshot-24-06-21-053401](https://github.com/murat-cileli/dbee/assets/6532000/8f178b6c-8fa1-4b19-819a-d09e924109b3) | ![screenshot-24-06-21-053514](https://github.com/murat-cileli/dbee/assets/6532000/c0c91f0a-61fb-4510-8b29-b796ed8ab91f) |
+| <img src="https://github.com/murat-cileli/dbee/assets/6532000/38842b6c-54d2-4be9-9c40-f9c9f679a3d9" style="height:140px;" /> | <img src="https://github.com/murat-cileli/dbee/assets/6532000/8f178b6c-8fa1-4b19-819a-d09e924109b3" style="height:140px;" /> | <img src="https://github.com/murat-cileli/dbee/assets/6532000/c0c91f0a-61fb-4510-8b29-b796ed8ab91f" style="height:140px;" /> |
 
-## Installation
+### 🐝 Installation
 Visit [Releases](https://github.com/murat-cileli/dbee/releases) section.
 
-#### Building From Source
+**Building From Source**
 ```console
 git clone https://github.com/murat-cileli/dbee.git
 cd src
@@ -33,7 +34,7 @@ go build .
 ./dbee
 ```
 
-## Keyboard Shortcuts
+### 🐝 Keyboard Shortcuts
 
 **Global**  
 <kbd>ESC</kbd> : Quit application
@@ -65,6 +66,6 @@ go build .
 <kbd>Alt</kbd> + <kbd>R</kbd> : Focus results table  
 <kbd>Arrow Keys</kbd>, <kbd>Home/End</kbd>, <kbd>Page Up/Page Down</kbd> : Navigate table
 
-### Notes
+### 🐝 Notes
 - Contributions are welcome.
 - Follow me on [LinkedIn](https://www.linkedin.com/in/murat-cileli/)
