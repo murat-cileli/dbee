@@ -24,6 +24,16 @@ builds:
       - darwin
     dir: src
 
+    ignore:
+      - goos: linux
+        goarch: arm64
+      - goos: linux
+        goarch: arm
+      - goos: windows
+        goarch: arm64
+      - goos: windows
+        goarch: arm
+
 archives:
   - format: tar.gz
     # this name template makes the OS and Arch compatible with the results of `uname`.
@@ -38,6 +48,28 @@ archives:
     format_overrides:
       - goos: windows
         format: zip
+
+nfpms:
+  - file_name_template: "{{ .ConventionalFileName }}"
+    id: dbee
+    package_name: dbee
+    homepage: https://github.com/murat-cileli/dbee
+    description: |-
+      Terminal based database browser.
+    maintainer: Murat Cileli <murat.cileli@gmail.com>
+    license: GNU GPL v3
+    vendor: Murat Cileli
+    formats:
+      - deb
+      - rpm
+      - archlinux
+    bindir: /usr/bin
+    section: utils
+    deb:
+      fields:
+        Bugs: https://github.com/murat-cileli/dbee/issues
+    archlinux:
+      packager: Murat Cileli <murat.cileli@gmail.com>
 
 changelog:
   sort: asc
