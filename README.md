@@ -19,7 +19,7 @@
 - Execute custom SQL queries.  
 - Custom SQL query history.
 
-### Philosophy
+### 🐝 Philosophy
 * **Non-destructive by design**: Users cannot accidentally drop a database or table from the UI. Destructive features does not exist and WILL NOT be implemented.
 * **Keep it lightweight**: DBee WILL NOT support every possible database, data store, or key-value store. Initially, it will support only popular databases, with additional support determined by community requests.
 * **Keep it simple**: Working with multiple databases, tabs, and advanced UI elements WILL NOT be implemented. Handling multiple databases in the same UI can be confusing, even in advanced GUI clients. Users who want to work with multiple databases can start a new DBee session in a separate terminal tab.
