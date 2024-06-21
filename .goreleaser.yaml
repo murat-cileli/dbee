@@ -12,6 +12,7 @@ builds:
       - linux
       - windows
       - darwin
+      - freebsd
     dir: src
     ignore:
       - goos: linux
@@ -22,16 +23,20 @@ builds:
         goarch: arm64
       - goos: windows
         goarch: arm
+      - goos: freebsd
+        goarch: arm64
+      - goos: freebsd
+        goarch: arm
 
 archives:
   - format: tar.gz
     name_template: >-
       {{ .ProjectName }}_
-      {{- title .Os }}_
+      {{- if eq .Os "darwin" }}macos
+      {{- else }}{{ .Os }}{{ end }}_
       {{- if eq .Arch "amd64" }}x86_64
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
-      {{- if .Arm }}v{{ .Arm }}{{ end }}
     format_overrides:
       - goos: windows
         format: zip
@@ -42,7 +47,7 @@ nfpms:
     package_name: dbee
     homepage: https://github.com/murat-cileli/dbee
     description: |-
-      Terminal based database browser.
+      Fast & Minimalistic Database Browser
     maintainer: Murat Cileli <murat.cileli@gmail.com>
     license: GNU GPL v3
     vendor: Murat Cileli
