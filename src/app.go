@@ -9,22 +9,24 @@ import (
 	"github.com/rivo/tview"
 )
 
-type applicationType struct{}
+type applicationType struct {
+	pages         *tview.Pages
+	ListShortcuts []rune
+}
 
 var app *tview.Application
-var pagesApp *tview.Pages
-var listShortcuts = []rune{'1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
 
 func (application *applicationType) init() {
 	app = tview.NewApplication()
 
-	pagesApp = tview.NewPages()
+	application.pages = tview.NewPages()
 	pageAlert.build()
 	pageConfirm.build()
 	pageConnection.build().show()
 	application.registerGlobalShortcuts()
+	application.ListShortcuts = []rune{'1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
 
-	if err := app.SetRoot(pagesApp, true).EnableMouse(true).EnablePaste(true).Run(); err != nil {
+	if err := app.SetRoot(application.pages, true).EnableMouse(true).EnablePaste(true).Run(); err != nil {
 		panic(err)
 	}
 }

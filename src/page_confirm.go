@@ -20,7 +20,7 @@ func (pageConfirm *pageConfirmType) build() {
 	pageConfirm.Modal.Box.SetBorderColor(tcell.ColorWhite.TrueColor())
 	pageConfirm.SetTitleColor(tcell.ColorWhite.TrueColor())
 	pageConfirm.Modal.SetTextColor(tcell.ColorWhite.TrueColor())
-	pagesApp.AddPage("confirm", pageConfirm.Modal, true, false)
+	application.pages.AddPage("confirm", pageConfirm.Modal, true, false)
 }
 
 func (pageConfirm *pageConfirmType) show(message string, callback func()) {
@@ -28,8 +28,8 @@ func (pageConfirm *pageConfirmType) show(message string, callback func()) {
 		if buttonLabel == "Yes" {
 			callback()
 		}
-		pagesApp.HidePage("confirm")
+		application.pages.HidePage("confirm")
 	})
 	pageConfirm.Modal.SetText(message)
-	pagesApp.ShowPage("confirm").SendToFront("confirm")
+	application.pages.ShowPage("confirm").SendToFront("confirm")
 }

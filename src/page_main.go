@@ -1,73 +1,71 @@
 package main
 
 import (
-	"database/sql"
-
 	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
 )
 
 type pageMainType struct {
-	flexQuerySize int
+	flexQuerySize       int
+	flexMain            *tview.Flex
+	flexInner           *tview.Flex
+	textAreaQuery       *tview.TextArea
+	listDatabaseObjects *tview.List
+	pages               *tview.Pages
 }
 
 var pageMain pageMainType
-var flexMain *tview.Flex
-var flexInner *tview.Flex
-var textAreaQuery *tview.TextArea
-var listDatabaseObjects *tview.List
-var pagesMain *tview.Pages
 
 func (pageMain *pageMainType) build() {
-	listDatabaseObjects = tview.NewList()
+	pageMain.listDatabaseObjects = tview.NewList()
 
-	listDatabaseObjects.
+	pageMain.listDatabaseObjects.
 		SetBorder(true).
 		SetTitle("Objects (alt+w)").
 		SetTitleAlign(tview.AlignCenter)
 
-	listDatabaseObjects.SetSelectedFocusOnly(true)
+	pageMain.listDatabaseObjects.SetSelectedFocusOnly(true)
 
 	pageMain.loadDatabaseObjects()
 
-	textAreaQuery = tview.NewTextArea()
+	pageMain.textAreaQuery = tview.NewTextArea()
 
-	textAreaQuery.
+	pageMain.textAreaQuery.
 		SetPlaceholder("Type your query here, (alt+enter) to execute.").
 		SetBorder(true).
 		SetTitle(" [yellow]" + database.Database + "[-:-:-:-] |" + " Query (alt+e) ").
 		SetTitleAlign(tview.AlignCenter)
 
-	pagesMain = tview.NewPages()
+	pageMain.pages = tview.NewPages()
 	pageMainTable.build()
 	pageMainMessage.build()
 	pageMainMessage.show(tview.AlignCenter, "", "helpText")
 
 	pageMain.flexQuerySize = 1
 
-	flexInner = tview.NewFlex().SetDirection(tview.FlexRow).
-		AddItem(textAreaQuery, 0, 1, true).
-		AddItem(pagesMain, 0, 4, true)
+	pageMain.flexInner = tview.NewFlex().SetDirection(tview.FlexRow).
+		AddItem(pageMain.textAreaQuery, 0, 1, true).
+		AddItem(pageMain.pages, 0, 4, true)
 
-	flexMain = tview.NewFlex().
-		AddItem(listDatabaseObjects, 0, 1, false).
-		AddItem(flexInner, 0, 2, false)
+	pageMain.flexMain = tview.NewFlex().
+		AddItem(pageMain.listDatabaseObjects, 0, 1, false).
+		AddItem(pageMain.flexInner, 0, 2, false)
 
-	flexMain.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
+	pageMain.flexMain.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		if event.Rune() == 'w' && event.Modifiers() == tcell.ModAlt {
-			app.SetFocus(listDatabaseObjects)
+			app.SetFocus(pageMain.listDatabaseObjects)
 			return nil
 		}
 		if event.Rune() == 'e' && event.Modifiers() == tcell.ModAlt {
-			app.SetFocus(textAreaQuery)
+			app.SetFocus(pageMain.textAreaQuery)
 		}
 		if event.Rune() == 'r' && event.Modifiers() == tcell.ModAlt {
-			app.SetFocus(tableQueryResults)
-			tableQueryResults.SetSelectable(true, false)
+			pageMainTable.focusTable()
+			pageMainTable.tableQueryResults.SetSelectable(true, false)
 		}
 		if event.Rune() == 'h' && event.Modifiers() == tcell.ModAlt {
-			pagesMain.SwitchToPage("message")
-			app.SetFocus(textViewMessage)
+			pageMain.pages.SwitchToPage("message")
+			pageMainMessage.focus()
 			pageMainMessage.show(tview.AlignLeft, "", "helpText")
 		}
 		if event.Rune() == 'm' && event.Modifiers() == tcell.ModAlt {
@@ -79,30 +77,30 @@ func (pageMain *pageMainType) build() {
 		return event
 	})
 
-	textAreaQuery.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
+	pageMain.textAreaQuery.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		if event.Key() == tcell.KeyEnter && event.Modifiers() == tcell.ModAlt {
 			event = nil
-			textAreaQuery.SetDisabled(true)
-			results, err := database.Query(textAreaQuery.GetText(), true)
+			pageMain.textAreaQuery.SetDisabled(true)
+			results, err := database.Query(pageMain.textAreaQuery.GetText(), true)
 			if err == nil {
-				pageMain.loadQueryResults(results)
+				pageMainTable.loadQueryResults(results)
 			}
-			textAreaQuery.SetDisabled(false)
+			pageMain.textAreaQuery.SetDisabled(false)
 		} else if event.Key() == tcell.KeyUp && event.Modifiers() == tcell.ModAlt {
 			queryHistory := queryHistory.back()
 			if queryHistory != "" {
-				textAreaQuery.SetText(queryHistory, true)
+				pageMain.textAreaQuery.SetText(queryHistory, true)
 			}
 		} else if event.Key() == tcell.KeyDown && event.Modifiers() == tcell.ModAlt {
 			queryHistory := queryHistory.forward()
 			if queryHistory != "" {
-				textAreaQuery.SetText(queryHistory, true)
+				pageMain.textAreaQuery.SetText(queryHistory, true)
 			}
 		}
 		return event
 	})
 
-	listDatabaseObjects.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
+	pageMain.listDatabaseObjects.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		if event.Key() == tcell.KeyEnter {
 			pageMain.browseDatabaseObject()
 		}
@@ -112,7 +110,7 @@ func (pageMain *pageMainType) build() {
 		return event
 	})
 
-	pagesApp.AddPage("main", flexMain, true, false)
+	application.pages.AddPage("main", pageMain.flexMain, true, false)
 }
 
 func (pageMain *pageMainType) resizeFlexQuery(direction string) {
@@ -122,13 +120,13 @@ func (pageMain *pageMainType) resizeFlexQuery(direction string) {
 	if direction == "up" && pageMain.flexQuerySize > 1 {
 		pageMain.flexQuerySize--
 	}
-	flexInner.ResizeItem(textAreaQuery, 0, pageMain.flexQuerySize)
+	pageMain.flexInner.ResizeItem(pageMain.textAreaQuery, 0, pageMain.flexQuerySize)
 	app.Sync().ForceDraw()
 
 }
 
 func (pageMain *pageMainType) describeDatabaseObject() {
-	selectedObject, _ := listDatabaseObjects.GetItemText(listDatabaseObjects.GetCurrentItem())
+	selectedObject, _ := pageMain.listDatabaseObjects.GetItemText(pageMain.listDatabaseObjects.GetCurrentItem())
 	query := ""
 	if database.DriverName == "MySQL/MariaDB" {
 		query = "DESCRIBE " + selectedObject
@@ -137,20 +135,20 @@ func (pageMain *pageMainType) describeDatabaseObject() {
 	}
 	results, err := database.Query(query, false)
 	if err == nil {
-		pageMain.loadQueryResults(results)
+		pageMainTable.loadQueryResults(results)
 	}
 }
 
 func (pageMain *pageMainType) browseDatabaseObject() {
-	selectedObject, _ := listDatabaseObjects.GetItemText(listDatabaseObjects.GetCurrentItem())
+	selectedObject, _ := pageMain.listDatabaseObjects.GetItemText(pageMain.listDatabaseObjects.GetCurrentItem())
 	results, err := database.Query("SELECT * FROM "+selectedObject+" LIMIT 5", false)
 	if err == nil {
-		pageMain.loadQueryResults(results)
+		pageMainTable.loadQueryResults(results)
 	}
 }
 
 func (pageMain *pageMainType) loadDatabaseObjects() {
-	listDatabaseObjects.Clear()
+	pageMain.listDatabaseObjects.Clear()
 
 	tables, err := database.getTables()
 	if tables == nil || err != nil {
@@ -164,79 +162,16 @@ func (pageMain *pageMainType) loadDatabaseObjects() {
 		table := ""
 		tables.Scan(&table)
 		shortcutRune = rune(0)
-		if listShortcutIndex < len(listShortcuts) {
-			shortcutRune = listShortcuts[listShortcutIndex]
+		if listShortcutIndex < len(application.ListShortcuts) {
+			shortcutRune = application.ListShortcuts[listShortcutIndex]
 			listShortcutIndex++
 		}
-		listDatabaseObjects.
+		pageMain.listDatabaseObjects.
 			AddItem(table, "", shortcutRune, nil).
 			ShowSecondaryText(false)
 	}
 }
 
-func (pageMain *pageMainType) loadQueryResults(rows *sql.Rows) {
-	tableQueryResults.Clear()
-	defer rows.Close()
-
-	columns, err := rows.Columns()
-	if err != nil {
-		return
-	}
-
-	pagesMain.SwitchToPage("tableQueryResults")
-
-	for i, column := range columns {
-		tableQueryResults.SetCell(
-			0, i,
-			&tview.TableCell{
-				Text:            column,
-				Color:           tcell.ColorDarkGoldenrod,
-				BackgroundColor: tcell.ColorBlack,
-			},
-		)
-	}
-
-	if rows == nil {
-		return
-	}
-
-	columnsCount := len(columns)
-	values := make([]sql.NullString, columnsCount)
-	valuePtrs := make([]any, columnsCount)
-	rowCount := 1
-
-	for rows.Next() {
-		for i := range columns {
-			valuePtrs[i] = &values[i]
-		}
-
-		err := rows.Scan(valuePtrs...)
-		if err != nil {
-			panic(err)
-		}
-
-		for i, cell := range values {
-			cellTextColor := tcell.ColorWhite
-			if i == 0 {
-				cellTextColor = tcell.ColorDarkGoldenrod
-			}
-
-			tableQueryResults.SetCell(
-				rowCount, i,
-				&tview.TableCell{
-					Text:            cell.String,
-					Color:           cellTextColor,
-					BackgroundColor: tcell.ColorBlack,
-				},
-			)
-		}
-
-		rowCount++
-	}
-
-	if rowCount > 1 && columnsCount > 1 {
-		tableQueryResults.SetFixed(1, 1)
-	}
-
-	tableQueryResults.SetSelectable(false, false)
+func (pageMain *pageMainType) focusQueryBox() {
+	app.SetFocus(pageMain.textAreaQuery)
 }

@@ -5,21 +5,21 @@ import (
 )
 
 type pageMainMessageType struct {
-	helpText string
+	helpText        string
+	textViewMessage *tview.TextView
 }
 
 var pageMainMessage pageMainMessageType
-var textViewMessage *tview.TextView
 
 func (pageMainMessage *pageMainMessageType) build() {
-	textViewMessage = tview.NewTextView()
-	textViewMessage.SetBorder(true)
-	textViewMessage.SetBorderPadding(1, 1, 1, 1)
-	textViewMessage.SetTitleAlign(tview.AlignCenter)
-	textViewMessage.SetRegions(true)
-	textViewMessage.SetWordWrap(true)
-	textViewMessage.SetWrap(true)
-	textViewMessage.SetScrollable(true)
+	pageMainMessage.textViewMessage = tview.NewTextView()
+	pageMainMessage.textViewMessage.SetBorder(true)
+	pageMainMessage.textViewMessage.SetBorderPadding(1, 1, 1, 1)
+	pageMainMessage.textViewMessage.SetTitleAlign(tview.AlignCenter)
+	pageMainMessage.textViewMessage.SetRegions(true)
+	pageMainMessage.textViewMessage.SetWordWrap(true)
+	pageMainMessage.textViewMessage.SetWrap(true)
+	pageMainMessage.textViewMessage.SetScrollable(true)
 
 	pageMainMessage.helpText = `KEYBOARD SHORTCUTS
 
@@ -59,22 +59,26 @@ DBee is a free and open-source project maintained by contributors. Feel free rep
 
 [yellow]GitHub[-:-:-:-]: [:::https://github.com/murat-cileli/dbee]https://github.com/murat-cileli/dbee[:::-]
 `
-	pagesMain.AddPage("message", textViewMessage, true, false)
+	pageMain.pages.AddPage("message", pageMainMessage.textViewMessage, true, false)
 }
 
 func (pageMainMessage *pageMainMessageType) show(textAlign int, title, message string) {
-	textViewMessage.Clear()
+	pageMainMessage.textViewMessage.Clear()
 
 	switch message {
 	case "helpText":
-		textViewMessage.SetTextAlign(tview.AlignLeft)
-		textViewMessage.SetTitle("DBee Help (alt+h)")
-		textViewMessage.SetText(pageMainMessage.helpText)
+		pageMainMessage.textViewMessage.SetTextAlign(tview.AlignLeft)
+		pageMainMessage.textViewMessage.SetTitle("DBee Help (alt+h)")
+		pageMainMessage.textViewMessage.SetText(pageMainMessage.helpText)
 	default:
-		textViewMessage.SetTextAlign(textAlign)
-		textViewMessage.SetTitle(title)
-		textViewMessage.SetText(message)
+		pageMainMessage.textViewMessage.SetTextAlign(textAlign)
+		pageMainMessage.textViewMessage.SetTitle(title)
+		pageMainMessage.textViewMessage.SetText(message)
 	}
 
-	pagesMain.SwitchToPage("message")
+	pageMain.pages.SwitchToPage("message")
+}
+
+func (pageMainMessage *pageMainMessageType) focus() {
+	app.SetFocus(pageMainMessage.textViewMessage)
 }
