@@ -152,6 +152,7 @@ func (pageMain *pageMainType) loadDatabaseObjects() {
 
 func (pageMain *pageMainType) loadQueryResults(rows *sql.Rows) {
 	tableQueryResults.Clear()
+	defer rows.Close()
 
 	columns, err := rows.Columns()
 	if err != nil {
