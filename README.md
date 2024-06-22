@@ -17,7 +17,8 @@
 - List of selectable tables/views with a single key shortcuts.  
 - View table/view structure or browse data. 
 - Execute custom SQL queries.  
-- Custom SQL query history.
+- SQL query history.
+- Free and open-source software.
 
 ### 🐝 Philosophy
 * **Non-destructive by design**: Users cannot accidentally drop a database or table from the UI. Destructive features does not exist and WILL NOT be implemented.
@@ -44,11 +45,13 @@ go build .
 ### 🐝 Keyboard Shortcuts
 
 **Global**  
-<kbd>ESC</kbd> : Quit application
+<kbd>ESC</kbd> : Quit application  
+<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd> : Paste text  
+<kbd>Ctrl</kbd> + <kbd>Z</kbd> : Undo text  
 
 **Connections Page -> Saved Connections Pane**  
 <kbd>Alt</kbd> + <kbd>S</kbd> : Focus saved connections pane  
-<kbd>1 .. Z</kbd> : Selects saved connection  
+<kbd>1..9, A..Z</kbd> : Selects saved connection  
 <kbd>Enter</kbd> : Apply saved connection  
 
 **Connections Page -> Connect to Server Pane**  
@@ -57,7 +60,7 @@ go build .
 
 **Main Page -> Database Objects Pane**  
 <kbd>Alt</kbd> + <kbd>W</kbd> : Focus database objects pane  
-<kbd>1 .. Z</kbd> : Selects a table/view  
+<kbd>1..9, A..Z</kbd> : Selects a table/view  
 <kbd>Enter</kbd> : Browse top 5 table/view rows  
 <kbd>Ctrl</kbd> + <kbd>Space</kbd>: View table/view structure
 
@@ -66,8 +69,8 @@ go build .
 <kbd>Alt</kbd> + <kbd>Enter</kbd> : Execute SQL query  
 <kbd>Alt</kbd> + <kbd>Up</kbd> : Go back in query history  
 <kbd>Alt</kbd> + <kbd>Down</kbd> : Go forward in query history  
-<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd> : Paste  
-<kbd>Ctrl</kbd> + <kbd>Z</kbd> : Undo  
+<kbd>Alt</kbd> + <kbd>M</kbd> : Expand query box    
+<kbd>Alt</kbd> + <kbd>J</kbd> : Shrink query box   
 
 **Main Page -> Results Table**  
 <kbd>Alt</kbd> + <kbd>R</kbd> : Focus results table  

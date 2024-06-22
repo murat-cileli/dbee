@@ -7,10 +7,13 @@ import (
 	"github.com/rivo/tview"
 )
 
-type pageMainType struct{}
+type pageMainType struct {
+	flexQuerySize int
+}
 
 var pageMain pageMainType
 var flexMain *tview.Flex
+var flexInner *tview.Flex
 var textAreaQuery *tview.TextArea
 var listDatabaseObjects *tview.List
 var pagesMain *tview.Pages
@@ -40,12 +43,15 @@ func (pageMain *pageMainType) build() {
 	pageMainMessage.build()
 	pageMainMessage.show(tview.AlignCenter, "", "helpText")
 
+	pageMain.flexQuerySize = 1
+
+	flexInner = tview.NewFlex().SetDirection(tview.FlexRow).
+		AddItem(textAreaQuery, 0, 1, true).
+		AddItem(pagesMain, 0, 4, true)
+
 	flexMain = tview.NewFlex().
 		AddItem(listDatabaseObjects, 0, 1, false).
-		AddItem(tview.NewFlex().SetDirection(tview.FlexRow).
-			AddItem(textAreaQuery, 0, 1, true).
-			AddItem(pagesMain, 0, 4, true).
-			AddItem(tview.NewBox(), 0, 0, false), 0, 2, false)
+		AddItem(flexInner, 0, 2, false)
 
 	flexMain.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		if event.Rune() == 'w' && event.Modifiers() == tcell.ModAlt {
@@ -63,6 +69,12 @@ func (pageMain *pageMainType) build() {
 			pagesMain.SwitchToPage("message")
 			app.SetFocus(textViewMessage)
 			pageMainMessage.show(tview.AlignLeft, "", "helpText")
+		}
+		if event.Rune() == 'm' && event.Modifiers() == tcell.ModAlt {
+			pageMain.resizeFlexQuery("down")
+		}
+		if event.Rune() == 'j' && event.Modifiers() == tcell.ModAlt {
+			pageMain.resizeFlexQuery("up")
 		}
 		return event
 	})
@@ -101,6 +113,18 @@ func (pageMain *pageMainType) build() {
 	})
 
 	pagesApp.AddPage("main", flexMain, true, false)
+}
+
+func (pageMain *pageMainType) resizeFlexQuery(direction string) {
+	if direction == "down" && pageMain.flexQuerySize < 4 {
+		pageMain.flexQuerySize++
+	}
+	if direction == "up" && pageMain.flexQuerySize > 1 {
+		pageMain.flexQuerySize--
+	}
+	flexInner.ResizeItem(textAreaQuery, 0, pageMain.flexQuerySize)
+	app.Sync().ForceDraw()
+
 }
 
 func (pageMain *pageMainType) describeDatabaseObject() {

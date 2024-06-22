@@ -38,6 +38,8 @@ func (pageMainMessage *pageMainMessageType) build() {
 [yellow]alt + enter[-:-:-:-]: Execute the query.
 [yellow]alt + up[-:-:-:-]: Go back in the query history.
 [yellow]alt + down[-:-:-:-]: Go forward in the query history.
+[yellow]alt + m[-:-:-:-]: Expand the query text area.
+[yellow]alt + j[-:-:-:-]: Shrink the query text area.
 
 [green]Object List:[-:-:-:-]
 [yellow]1..9, a..z[-:-:-:-]: Select an object.
