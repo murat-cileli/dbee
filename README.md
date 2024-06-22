@@ -7,15 +7,22 @@
 </p>
 
 ### 🐝 Features
-- Simple, lightweight, fast!
-- Keyboard-centric workflow
-- Single executable with no dependencies
-- Supports MySQL, MariaDB, and PostgreSQL
-- Save connections (except passwords)
-- List database tables and views  
-- View table structures and browse data  
-- Execute SQL queries  
-- SQL query history
+- Simple, lightweight, minimalistic, fast!
+- Keyboard-centric workflow with optionally mouse support.  
+- Single executable with no dependencies.  
+- Supports multiple platforms (**Linux**, **FreeBSD**, **MacOS**, **Windows**).  
+- Supports multiple architectures (**x86_64**, **arm64**, **i386**).
+- Supports **MySQL**, **MariaDB**, and **PostgreSQL**.  
+- Optional feature to save connections (except passwords).  
+- List of selectable tables/views with a single key shortcuts.  
+- View table/view structure or browse data. 
+- Execute custom SQL queries.  
+- Custom SQL query history.
+
+### 🐝 Philosophy
+* **Non-destructive by design**: Users cannot accidentally drop a database or table from the UI. Destructive features does not exist and WILL NOT be implemented.
+* **Keep it lightweight**: DBee WILL NOT support every possible database, data store, or key-value store. Initially, it will support only popular databases, with additional support determined by community requests.
+* **Keep it simple**: Working with multiple databases, tabs, and advanced UI elements WILL NOT be implemented. Handling multiple databases in the same UI can be confusing, even in advanced GUI clients. Users who want to work with multiple databases can start a new DBee session in a separate terminal tab.
 
 ### 🐝 Screenshots
 
