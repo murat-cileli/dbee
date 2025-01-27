@@ -132,6 +132,8 @@ func (pageMain *pageMainType) describeDatabaseObject() {
 		query = "DESCRIBE " + selectedObject
 	} else if database.DriverName == "PostgreSQL" {
 		query = "SELECT * FROM information_schema.columns WHERE table_name = '" + selectedObject + "'"
+	} else if database.DriverName == "SQLite" {
+		query = "SELECT * FROM pragma_table_info('" + selectedObject + "')"
 	}
 	results, err := database.Query(query, false)
 	if err == nil {

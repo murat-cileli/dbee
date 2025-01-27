@@ -12,7 +12,7 @@
 - Single executable with no dependencies.  
 - Supports multiple platforms (**Linux**, **FreeBSD**, **MacOS**, **Windows**).  
 - Supports multiple architectures (**x86_64**, **arm64**, **i386**).
-- Supports **MySQL**, **MariaDB**, and **PostgreSQL**.  
+- Supports **MySQL**, **MariaDB**, **PostgreSQL** and **SQLite**.  
 - Optional feature to save connections (except passwords).  
 - List of selectable tables/views with a single key shortcuts.  
 - View table/view structure or browse data. 
@@ -30,6 +30,8 @@
 | Connection 	| Main 	| Results 	|
 |------------	|:----:	|:-------:	|
 | <img src="https://github.com/murat-cileli/dbee/assets/6532000/38842b6c-54d2-4be9-9c40-f9c9f679a3d9" style="height:140px;" /> | <img src="https://github.com/murat-cileli/dbee/assets/6532000/8f178b6c-8fa1-4b19-819a-d09e924109b3" style="height:140px;" /> | <img src="https://github.com/murat-cileli/dbee/assets/6532000/c0c91f0a-61fb-4510-8b29-b796ed8ab91f" style="height:140px;" /> |
+
+* For SQLite: Host = database path
 
 ### 🐝 Installation
 Visit [Releases](https://github.com/murat-cileli/dbee/releases) section.

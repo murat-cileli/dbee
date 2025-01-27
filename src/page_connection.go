@@ -18,7 +18,7 @@ type pageConnectionType struct {
 var pageConnection pageConnectionType
 
 func (pageConnection *pageConnectionType) build() *pageConnectionType {
-	pageConnection.databaseDrivers = []string{"MySQL/MariaDB", "PostgreSQL"}
+	pageConnection.databaseDrivers = []string{"MySQL/MariaDB", "PostgreSQL", "SQLite"}
 	pageConnection.listSavedConnections = tview.NewList()
 	pageConnection.listSavedConnections.SetBorder(true).SetTitle("Saved Connections (alt+s)").SetTitleAlign(tview.AlignCenter)
 	pageConnection.listSavedConnections.SetBorderPadding(1, 1, 2, 2)

@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"time"
 
+	_ "github.com/glebarez/go-sqlite"
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
 	"github.com/rivo/tview"
@@ -29,6 +30,9 @@ func (database *databaseType) buildConnectionString() {
 	} else if database.DriverName == "PostgreSQL" {
 		database.Driver = "postgres"
 		database.ConnectionString = "host=" + database.Host + " user=" + database.User + " password=" + database.Password + " dbname=" + database.Database + " sslmode=disable"
+	} else if database.DriverName == "SQLite" {
+		database.Driver = "sqlite"
+		database.ConnectionString = database.Host
 	}
 }
 
@@ -83,6 +87,8 @@ func (database *databaseType) getTables() (*sql.Rows, error) {
 		query = "SHOW TABLES"
 	} else if database.Driver == "postgres" {
 		query = "SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema'"
+	} else if database.Driver == "sqlite" {
+		query = "SELECT name FROM sqlite_master WHERE type='table'"
 	}
 	return database.Query(query, false)
 }
